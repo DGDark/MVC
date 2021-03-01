@@ -47,6 +47,8 @@ public class Pedido {
     @JsonIgnore
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+    private List<Oferta> ofertas;
 
     public StatusPedido getStatus() {
         return status;
