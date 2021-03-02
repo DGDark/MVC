@@ -3,10 +3,10 @@
 	<head th:replace="~{base :: head}"></head>
 	<body onload="onLoad()">
 		<div th:replace="~{base :: logo}"></div>
-	
+
 		<div class="container" id="ofertas">
 			<div th:replace="~{base :: titulo('Faça sua Oferta')}"></div>
-						
+
 			<div class="card mb-3" v-for="pedido in pedidos">
 				<div class="card-header alert-dark">{{pedido.nomeProduto}}</div>
 				<div class="card-body">
@@ -15,7 +15,7 @@
 
 							<div>Produto</div>
 							<div> <a v-bind:href="pedido.urlProduto">{{pedido.nomeProduto}}</a></div>
-							
+
 							<div>Descrição</div>
 							<div>
 								<textarea  disabled class="form-control">{{pedido.descricao}}</textarea>
@@ -45,38 +45,31 @@
 			</div>
 		</div>
 		<script>
-        function onLoad() {
-            var app = new Vue(
-                    {
-                        el : '#ofertas',
-                        data : {
-                            pedidos : []
-                        },
-                        mounted () {
-                            axios
-                              .get('http://localhost:8080/api/pedidos/aguardando')
-								  .then(response => {
-									  response.data.forEach(pedido => {pedido.ofertaEnviada = falsse
-									  }
-								  })
-								  this.pedidos = response.data
-                              })
-                        },
-                        methods: {
-                        	enviarOferta: function(pedido){
-                        	axios
-						      .post('http://localhost:8080/api/oferta', {
-						    	  pedidoId: pedido.id,
-						    	  valor: pedido.valorNegociado,
-						    	  dataEntrega: pedido.dataEntrega,
-						    	  comentario: pedido.comentario
-						      })
-                              		.then(response => pedido.ofertaEnviada = true);
-                        	}
-                        }
-
-                    });
-        }
+		function onLoad() {
+					var app = new Vue(
+					{
+						el : '#ofertas',
+						data : {
+							pedidos : []
+						},
+						mounted () {
+							axios
+							  .get('http://localhost:8080/api/pedidos/aguardando')
+							  .then(response => (this.pedidos = response.data))
+						},
+						methods: {
+							enviarOferta: function(pedido){
+								axios
+							  		.post('http://localhost:8080/api/oferta', {
+										valor: pedido.valorNegociado,
+										dataEntrega: pedido.dataEntrega,
+										comentario: pedido.comentario
+										})
+							  		.then(response => console.log(response));
+							}
+						}
+					});
+				}
     </script>
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

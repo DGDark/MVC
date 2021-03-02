@@ -1,5 +1,6 @@
 package br.com.darkyn.mundi.mundi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Oferta {
     private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Pedido pedido;
 
 }
