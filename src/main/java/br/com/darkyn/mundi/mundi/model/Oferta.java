@@ -8,11 +8,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@Table(name = "ofertas")
+@Table(name = "oferta")
 @Entity
 public class Oferta {
-
-    private static final long serialVersionUID = 1L;
 
     @Id
     @SequenceGenerator(name = "idOferta_Sequence", sequenceName = "idOferta_Sequence", allocationSize = 1)
@@ -22,12 +20,11 @@ public class Oferta {
 
     private BigDecimal Valor;
 
-    private LocalDate DataDaEntrega;
+    private LocalDate DataEntrega;
 
     private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     private Pedido pedido;
 
 }

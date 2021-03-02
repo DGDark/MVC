@@ -22,7 +22,7 @@ public class RequisicaoNovoPedido {
     private String descricao;
 
 
-    public Pedido toPedido(){
+    public Pedido toPedido() {
         Pedido pedido = new Pedido();
         pedido.setDescricao(descricao);
         pedido.setNomeProduto(nomeProduto);

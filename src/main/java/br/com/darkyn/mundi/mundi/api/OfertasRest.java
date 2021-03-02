@@ -1,6 +1,6 @@
 package br.com.darkyn.mundi.mundi.api;
 
-import br.com.darkyn.mundi.mundi.dto.RequesicaoNovaOferta;
+import br.com.darkyn.mundi.mundi.dto.RequisicaoNovaOferta;
 import br.com.darkyn.mundi.mundi.model.Oferta;
 import br.com.darkyn.mundi.mundi.model.Pedido;
 import br.com.darkyn.mundi.mundi.repository.PedidoRepository;
@@ -14,14 +14,14 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/oferta")
-public class OfertaRest {
+@RequestMapping("/api/ofertas")
+public class OfertasRest {
 
     @Autowired
     private PedidoRepository pedidoRepository;
 
     @PostMapping
-    public Oferta criaOferta(@Valid @RequestBody RequesicaoNovaOferta requisicao) {
+    public Oferta criaOferta(@Valid @RequestBody RequisicaoNovaOferta requisicao) {
         Optional<Pedido> pedidoBuscado = pedidoRepository.findById(requisicao.getPedidoId());
         if(!pedidoBuscado.isPresent()) {
             return null;
@@ -36,5 +36,4 @@ public class OfertaRest {
 
         return nova;
     }
-
 }
