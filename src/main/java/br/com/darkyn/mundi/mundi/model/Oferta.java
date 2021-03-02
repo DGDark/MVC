@@ -14,8 +14,9 @@ public class Oferta {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @SequenceGenerator(name = "idOferta_Sequence", sequenceName = "idOferta_Sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idOferta_Sequence")
+    @Column(name = "ID")
     private Long id;
 
     private BigDecimal Valor;
